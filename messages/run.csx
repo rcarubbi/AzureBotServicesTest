@@ -13,14 +13,14 @@ using System.Linq;
 public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 {
     log.Info($"Webhook was triggered!");
-
+     
     // Initialize the azure bot
     using (BotService.Initialize())
     {
         // Deserialize the incoming activity
         string jsonContent = await req.Content.ReadAsStringAsync();
         log.Info(jsonContent);
-        
+         
         var activity = JsonConvert.DeserializeObject<Activity>(jsonContent);
         
         // authenticate incoming request and add activity.ServiceUrl to MicrosoftAppCredentials.TrustedHostNames
@@ -32,15 +32,11 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     
         if (activity != null)
         {
-            log.Info(activity.Attachments);
             // one of these will have an interface and process it
             switch (activity.GetActivityType())
             {
                 case ActivityTypes.Message:
-                    if (activity.Attachments.Count() > 0)
-                    {
-                        activity.Text = "Audio";
-                    }
+                  
                     await Conversation.SendAsync(activity, () => new BasicLuisDialog());
                     break;
                 case ActivityTypes.ConversationUpdate:
