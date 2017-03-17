@@ -5,5 +5,9 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <ProjectGuid>{3C44D82F-E54B-40A5-A821-88D8700BA62A}</ProjectGuid>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="BasicLuisDialog.csx" />
+    <None Include="run.csx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
