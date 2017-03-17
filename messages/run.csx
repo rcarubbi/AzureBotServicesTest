@@ -32,10 +32,10 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     
         if (activity != null)
         {
+            log.Info(activity.Attachments);
             // one of these will have an interface and process it
             switch (activity.GetActivityType())
             {
-                log.Info(activity.Attachments);
                 case ActivityTypes.Message:
                     if (activity.Attachments.Count() > 0)
                     {
